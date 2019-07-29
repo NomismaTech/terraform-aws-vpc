@@ -264,14 +264,14 @@ resource "aws_subnet" "private" {
 
   vpc_id            = local.vpc_id
   cidr_block        = var.private_subnets[count.index]
-  availability_zone = element(var.azs, count.index)
+  availability_zone = element(var.azs, var.all_private_subnets_in_one_az ? 0 : count.index)
 
   tags = merge(
     {
       "Name" = format(
         "%s-${var.private_subnet_suffix}-%s",
         var.name,
-        element(var.azs, count.index),
+        element(var.azs, var.all_private_subnets_in_one_az ? 0 : count.index),
       )
     },
     var.tags,

@@ -1385,3 +1385,8 @@ variable "elasticache_outbound_acl_rules" {
   ]
 }
 
+variable "all_private_subnets_in_one_az" {
+  description = "Whether or not all private subnets should reside in a single AZ. If true all private_subnets will be created in the first element of azs."
+  type        = bool
+  default     = false
+}
